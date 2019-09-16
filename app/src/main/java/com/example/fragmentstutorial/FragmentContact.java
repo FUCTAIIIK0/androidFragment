@@ -8,10 +8,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentContact extends Fragment {
 
     View v;
+
+    private RecyclerView recyclerView;
+    private List<Contact> contactList;
 
 
     public FragmentContact() {
@@ -23,7 +31,29 @@ public class FragmentContact extends Fragment {
 
         v = inflater.inflate(R.layout.contact_fragment, container, false);
 
+
+        recyclerView = v.findViewById(R.id.contactList);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), contactList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(recyclerViewAdapter);
+
         return v;
 
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        contactList = new ArrayList<>();
+
+        contactList.add(new Contact("Aaron Jones", "+7(921)141-55-86", R.drawable.usr));
+        contactList.add(new Contact("Aaron Jones", "+7(921)141-55-86", R.drawable.usr));
+        contactList.add(new Contact("Aaron Jones", "+7(921)141-55-86", R.drawable.usr));
+        contactList.add(new Contact("Aaron Jones", "+7(921)141-55-86", R.drawable.usr));
+        contactList.add(new Contact("Aaron Jones", "+7(921)141-55-86", R.drawable.usr));
+
+
+    }
+
 }
